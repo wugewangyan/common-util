@@ -20,6 +20,7 @@ public class ValidatorUtil {
 	
 	private static Map<String, Pattern> expressionPatternMap = new HashMap<String, Pattern>();
     private static ReentrantLock patternLock = new ReentrantLock();
+    private static SimpleDateFormat format = new SimpleDateFormat();
 	
 	private static final String ENUM_SCOPE_METHOD = "toEnum";
 	private static final String AMT_CONSTRUCTURE = "^0|(([1-9][0-9]{0,9}|0)(\\.[0-9]{2}))$";
@@ -90,6 +91,24 @@ public class ValidatorUtil {
 		}
 	}
 	
+	
+	public static boolean isLong(Object value){
+		if(null == value){
+			return false;
+		}
+		
+		try{
+			if(value instanceof Long){
+				return true;
+			}else{
+				Long.parseLong(value.toString());
+				return true;
+			}
+		}catch(NumberFormatException e){
+			return false;
+		}
+	}
+	
 	/**
 	 * 判断整型value是否在minValue和maxValue之间
 	 * @param value
@@ -103,6 +122,19 @@ public class ValidatorUtil {
 		}
 		
 		if(value.compareTo(minValue) >= 0 && value.compareTo(maxValue) <= 0){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
+	
+	public static boolean isValidLong(Long value, Integer minValue, Integer maxValue){
+		if(null == value){
+			return false;
+		}
+		
+		if(value.compareTo(minValue.longValue()) >= 0 && value.compareTo(maxValue.longValue()) <= 0){
 			return true;
 		}else{
 			return false;
@@ -183,14 +215,17 @@ public class ValidatorUtil {
 		}
 		
 		if(source instanceof String){
-			SimpleDateFormat format = new SimpleDateFormat(pattern);
 			try{
+				format.applyPattern(pattern);
 				format.setLenient(false);
 				format.parse(source.toString());
 				return true;
-			}catch(ParseException e){
-				return false;
-			}
+			}catch(ParseException e){}
+			
+			try{
+				Long.parseLong(source.toString());
+				return true;
+			}catch(NumberFormatException e){}
 		}
 		
 		return false;

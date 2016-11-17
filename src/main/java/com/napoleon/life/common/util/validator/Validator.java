@@ -30,6 +30,12 @@ public @interface Validator {
 	boolean isInteger() default false;
 	
 	/**
+	 * 是否是Long类型
+	 * @return
+	 */
+	boolean isLong() default false;
+	
+	/**
 	 * 是否是浮点数
 	 * @return
 	 */

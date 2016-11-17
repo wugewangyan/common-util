@@ -124,7 +124,7 @@ public class BaseValidator {
 			return false;
 		}
 
-		if (value instanceof Integer || value instanceof Long || validator.isInteger()){
+		if (value instanceof Integer || validator.isInteger()){
 			if(!ValidatorUtil.isInteger(value)){
 				results.add(new ValidateResult(fieldName, validator.desc() + "校验失败，不是一个合法的整数"));
 				return false;
@@ -134,6 +134,14 @@ public class BaseValidator {
 													+ validator.minValue() + ", " + validator.maxValue() + "]"));
 					return false;
 				}
+			}
+		}
+		
+		
+		if (value instanceof Long || validator.isLong()){
+			if(!ValidatorUtil.isLong(value)){
+				results.add(new ValidateResult(fieldName, validator.desc() + "校验失败，不是一个合法的长整型"));
+				return false;
 			}
 		}
 
