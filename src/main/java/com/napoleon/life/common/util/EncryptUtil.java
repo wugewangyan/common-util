@@ -6,6 +6,7 @@ import org.apache.commons.codec.binary.Base64;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.napoleon.life.common.code.UtilModelCode;
 import com.napoleon.life.exception.CommonException;
 
 /**
@@ -75,7 +76,7 @@ public class EncryptUtil {
 
 			return result;
 		} catch (Exception e) {
-			throw new CommonException(e);
+			throw new CommonException(UtilModelCode.UTIL_DIGEST_EXCEPTION, e);
 		}
 	}
 

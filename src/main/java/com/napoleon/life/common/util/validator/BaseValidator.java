@@ -9,6 +9,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
+import com.napoleon.life.common.code.UtilModelCode;
 import com.napoleon.life.common.util.ClassUtil;
 import com.napoleon.life.common.util.StringUtil;
 import com.napoleon.life.common.util.context.ContextUtil;
@@ -223,8 +224,7 @@ public class BaseValidator {
 			List<ValidateResult> validateResults, boolean entrance)
 			throws CommonException {
 		if (null == validatedObj || null == validateResults) {
-			throw new CommonException(
-					"The validated Object and ErrorResult Container can not be null.");
+			throw new CommonException(UtilModelCode.UTIL_VALIDATE_OBJECT_EXCEPTION);
 		}
 
 		// 获取该类所有的声明的字段，不包括继承的字段
@@ -271,10 +271,10 @@ public class BaseValidator {
 //								String.format(
 //										"cannot invoke the method %s for the Object %s",
 //										method.getName(), validatedObj));
-						throw new CommonException(e);
+						throw new CommonException(UtilModelCode.UTIL_VALIDATE_OBJECT_EXCEPTION, e);
 					}
 				} else {
-					throw new CommonException(String.format(
+					throw new CommonException(UtilModelCode.UTIL_VALIDATE_OBJECT_EXCEPTION.getCode(), String.format(
 							"Could not find the getter method: [%s]",
 							field.getName()));
 				}

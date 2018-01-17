@@ -3,6 +3,7 @@ package com.napoleon.life.common.util;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.napoleon.life.common.code.UtilModelCode;
 import com.napoleon.life.exception.CommonException;
 
 public class SignUtil {
@@ -20,7 +21,7 @@ public class SignUtil {
 		return signedStr != null && signedStr.equals(targetSignature);
 		}catch(Exception e){
 			logger.error(String.format("Failed to sign %s, with key: %s", EncryptUtil.encryptWithBase64(source), signKey), e);
-			throw new CommonException(e);
+			throw new CommonException(UtilModelCode.UTIL_CHECK_SIGN_EXCEPTION, e);
 		}
 	}
 }

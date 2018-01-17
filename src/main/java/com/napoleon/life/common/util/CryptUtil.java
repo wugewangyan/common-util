@@ -9,6 +9,7 @@ import javax.crypto.spec.SecretKeySpec;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.napoleon.life.common.code.UtilModelCode;
 import com.napoleon.life.exception.CommonException;
 
 
@@ -41,7 +42,7 @@ public class CryptUtil {
         }
         catch (Exception e) {
             logger.error("Fail to encrypt, due to " + e.getMessage());
-            throw new CommonException(e);
+            throw new CommonException(UtilModelCode.UTIL_ENCRYPT_EXCEPTION, e);
         }
     }
 
@@ -65,7 +66,7 @@ public class CryptUtil {
         }
         catch (Exception e) {
             logger.error("Fail to decrypt, due to " + e.getMessage());
-            throw new CommonException(e);
+            throw new CommonException(UtilModelCode.UTIL_DECRYPT_EXCEPTION, e);
         }
     }
     
